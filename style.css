@@ -74,7 +74,7 @@ body {
 
 .gif {
     width:480px;
-    height:480px;
+    height:auto;
     background-size: cover;
     margin: 1rem;
     display: inline-block;

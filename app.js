@@ -1,19 +1,22 @@
-const searchBtn = document.querySelector('#get');
-const removeBtn = document.querySelector('#remove');
-const board = document.querySelector('#board');
+const searchBtn = $('#get');
+const removeBtn = $('#remove');
+const board = $('#board');
 searchBtn.addEventListener('click', handleClick);
 removeBtn.addEventListener('click', removeItem);
 
 async function getGIF (find) {
-    
-    const response = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=udo6JyWo06EQPWNhTcB3PZGxalGGoxjS&q=${find}&limit=3&offset=0&rating=g&lang=en`);
+    const searchQ = { 
+        api_key: udo6JyWo06EQPWNhTcB3PZGxalGGoxjS, 
+        q: find,
+        limit: 1,
+        offset: 0,
+        rating: g,
+        lang: en
+    }
+
+    const response = await axios.get('https://api.giphy.com/v1/gifs/search', { params: { searchQ }});
     const { data } = response.data;
-    const { images } = data[0];
-    const { original } = images;
-    console.log(original);
-    const { url } = original;
-    console.log(url);
-    return url;  
+    return data[0].images.original.url;
 }
 
 async function handleClick(e) {
@@ -29,7 +32,6 @@ async function handleClick(e) {
     newGif.setAttribute('src', url);
     newGif.setAttribute('alt', 'new GIF')
     
-
     picture.append(newGif);
     board.append(picture);
     
